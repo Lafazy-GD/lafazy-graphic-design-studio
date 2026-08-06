@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-ink-950 text-gray-200 font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% -10%, rgba(99, 102, 241, 0.18), transparent),
+      radial-gradient(ellipse 50% 30% at 90% 10%, rgba(34, 211, 238, 0.1), transparent),
+      radial-gradient(ellipse 40% 30% at 10% 90%, rgba(99, 102, 241, 0.08), transparent);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-brand-500/30 text-white;
+  }
+
+  /* Accessibility: visible focus for keyboard navigation */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-400 rounded;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Skip to content link for screen readers / keyboard users */
+  .skip-link {
+    @apply absolute -top-10 left-4 z-[100] px-4 py-2 rounded-lg glass-strong text-white text-sm;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ink-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink-600 rounded-full border-2 border-ink-900;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-500;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl shadow-glass;
+  }
+
+  .glass-strong {
+    @apply bg-white/[0.08] backdrop-blur-2xl border border-white/15;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-brand-200 to-accent-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-brand {
+    @apply bg-gradient-to-r from-brand-500 to-accent-500;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white
+      bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400
+      shadow-glow transition-all duration-300 hover:shadow-glow-cyan hover:-translate-y-0.5
+      disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium
+      text-gray-300 glass hover:bg-white/10 transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium
+      text-white border border-white/15 hover:border-white/30 hover:bg-white/5 transition-all duration-300;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl bg-ink-800/60 border border-white/10 text-white placeholder-gray-500
+      focus:outline-none focus:border-brand-400/50 focus:ring-2 focus:ring-brand-500/20
+      transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
+      bg-white/5 border border-white/10 text-gray-300;
+  }
+
+  .section-padding {
+    @apply px-5 sm:px-8 lg:px-12;
+  }
+
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0
+      after:bg-current after:transition-all hover:after:w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
